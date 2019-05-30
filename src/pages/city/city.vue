@@ -5,8 +5,8 @@
         城市选择
      </div>
      <div class="main">
-        <cityRight :letterList="letterList"></cityRight>
-        <cityList :letterList="letterList" :hotCityList="hotCityList"></cityList>
+        <cityRight :letterList="letterList" v-on:parentLetter='parentLetter'></cityRight>
+        <cityList :letterList="letterList" :letter="letter" :hotCityList="hotCityList"></cityList>
     </div>
   </div>
 </template>
@@ -27,10 +27,15 @@ export default {
   data () {
     return {
       letterList: {},
-      hotCityList: []
+      hotCityList: [],
+      letter:''
     }
   },
-  methods: {},
+  methods: {
+    parentLetter (letter) {
+      this.letter = letter;
+    }
+  },
   components: {
     cityList,
     cityRight

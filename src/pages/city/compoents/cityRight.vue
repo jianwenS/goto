@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ul class="cityRight">
-      <li class="cityRightItem" v-for="(item,index) of letterList" :key="index">{{index}}</li>
+    <ul class="cityRight" @touchstart="moveStart" @touchmove="move" @touchend="moveEnd">
+      <li class="cityRightItem" @click="parentLetter(index)" v-for="(item,index) of letterList" :key="index">{{index}}</li>
     </ul>
   </div>
 </template>
@@ -14,7 +14,20 @@ export default {
     }
   },
   props: ['letterList'],
-  methods: {}
+  methods: {
+    moveStart () {
+      // console.log(1)
+    },
+    move () {
+      // console.log(2)
+    },
+    moveEnd () {
+      // console.log(3)
+    },
+    parentLetter (letter) {
+      this.$emit('parentLetter', letter)
+    }
+  }
 }
 </script>
 <style lang='less' socped>
@@ -29,8 +42,6 @@ export default {
         align-items:center;
         width:.4rem;
         height:.4rem;
-        
-        
       }
     }
 </style>

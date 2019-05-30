@@ -9,7 +9,7 @@
         </div>
         <div class="letter-main">
           <div class="city-main" v-for="(i, k) of letterList" :key="k">
-            <h3 class="hot-title">{{k}}</h3>
+            <h3 class="hot-title" :ref="k" >{{k}}</h3>
             <div class="city-item">
               <div class="city-item-is border-topright" v-for="letter of i" :key="letter.id">{{letter.name}}</div>
             </div>
@@ -27,10 +27,16 @@ export default {
     return {
     }
   },
-  props: ['letterList', 'hotCityList'],
+  props: ['letterList', 'hotCityList', 'letter'],
   methods: {},
   mounted () {
-    new Bsceoll(this.$refs.wapper)
+    this.scroll = new Bsceoll(this.$refs.wapper)
+  },
+  watch:{
+    letter () {
+      var letter = this.letter;
+      this.scroll.scrollToElement(this.$refs[letter][0]);
+    }
   }
 }
 </script>
