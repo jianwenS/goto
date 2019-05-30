@@ -10,7 +10,7 @@
             </div>
             <div class="header-right">
                 城市
-                <span class="iconfont icon-city">&#xe64a;</span>
+                <span @click="goCity" class="iconfont icon-city">&#xe64a;</span>
             </div>
        </div>
     </div>
@@ -19,6 +19,11 @@
 export default {
   data () {
     return {}
+  },
+  methods: {
+    goCity () {
+      this.$router.push('/city')
+    }
   }
 }
 </script>
