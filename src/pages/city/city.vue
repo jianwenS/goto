@@ -1,7 +1,7 @@
 <template>
   <div class="cityMain">
      <div class="header">
-       <span class="iconfont icon-city">&#xe624;</span>
+       <span class="iconfont icon-city" @click="goback">&#xe624;</span>
         城市选择
      </div>
      <div class="main">
@@ -13,6 +13,7 @@
 
 <script>
 import axios from 'axios'
+import {mapMutations} from 'vuex'
 import cityList from '@/pages/city/compoents/cityList'
 import cityRight from '@/pages/city/compoents/cityRight'
 export default {
@@ -31,10 +32,18 @@ export default {
       letter: ''
     }
   },
+  mounted () {},
+  computed: {},
   methods: {
     parentLetter (letter) {
       this.letter = letter
-    }
+    },
+    goback () {
+      this.backfirst()
+    },
+    ...mapMutations([
+      'backfirst'
+    ])
   },
   components: {
     cityList,

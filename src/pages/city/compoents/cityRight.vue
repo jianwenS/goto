@@ -13,7 +13,8 @@ export default {
     return {
       cityMain: '',
       touchStatus: false,
-      thatW: ''
+      thatW: '',
+      timer: null
     }
   },
   props: ['letterlist'],
@@ -36,10 +37,18 @@ export default {
     },
     move (e) {
       if (this.touchStatus) {
-        let index = Math.floor((e.changedTouches[0].clientY - this.cityMain) / this.thatW)
-        if (index >= 0 && index <= this.letter.length) {
-          console.log(this.letter[index])
+        if (this.timer) {
+          clearTimeout(this.timer)
         }
+        this.timer = setTimeout(() => {
+          let index = Math.floor((e.changedTouches[0].clientY - this.cityMain) / this.thatW)
+          if (!this.letter[index]) {
+            return false
+          }
+          if (index >= 0 && index <= this.letter.length) {
+            this.$emit('parentLetter', this.letter[index])
+          }
+        }, 17)
       }
     },
     moveEnd () {

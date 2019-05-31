@@ -8,17 +8,23 @@
                 <span class="iconfont">&#xe632;</span>
                 输入城市游玩景点或主题
             </div>
-            <div class="header-right">
-                城市
-                <span @click="goCity" class="iconfont icon-city">&#xe64a;</span>
+            <div class="header-right" @click="goCity" >
+                {{this.iscity}}
+                <span class="iconfont icon-city">&#xe64a;</span>
             </div>
        </div>
     </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
   data () {
     return {}
+  },
+  computed: {
+    ...mapState({
+      iscity: state => state.iscity
+    })
   },
   methods: {
     goCity () {
@@ -55,7 +61,7 @@ export default {
         }
 
         .header-right{
-            width:1.24rem;
+            width:1.8rem;
             float: right;
             text-align:center;
 

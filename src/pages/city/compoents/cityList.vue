@@ -4,14 +4,14 @@
         <div class="city-main">
           <h3 class="hot-title">热门城市</h3>
           <div class="city-item">
-            <div class="city-item-is border-topright" v-for="item in hotCityList" :key="item.id">{{item.name}}</div>
+            <div class="city-item-is border-topright" @click="changeCitys(item.name)" v-for="item in hotCityList" :key="item.id">{{item.name}}</div>
           </div>
         </div>
         <div class="letter-main">
           <div class="city-main" v-for="(i, k) of letterlist" :key="k">
             <h3 class="hot-title" :ref="k" >{{k}}</h3>
             <div class="city-item">
-              <div class="city-item-is border-topright" v-for="letter of i" :key="letter.id">{{letter.name}}</div>
+              <div class="city-item-is border-topright" @click="changeCitys(letter.name)" v-for="letter of i" :key="letter.id">{{letter.name}}</div>
             </div>
           </div>
         </div>
@@ -21,6 +21,7 @@
 
 <script>
 import Bsceoll from 'better-scroll'
+import {mapState, mapMutations} from 'vuex'
 export default {
   name: '',
   data () {
@@ -28,7 +29,20 @@ export default {
     }
   },
   props: ['letterlist', 'hotCityList', 'letter'],
-  methods: {},
+  methods: {
+    ...mapMutations([
+      'changeCity'
+    ]),
+    changeCitys (text) {
+      this.changeCity(text)
+      this.$router.push('/')
+    }
+  },
+  computed: {
+    ...mapState({
+      iscity: state => state.iscity
+    })
+  },
   mounted () {
     this.scroll = new Bsceoll(this.$refs.wapper)
   },
