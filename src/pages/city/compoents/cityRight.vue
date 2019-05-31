@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ul class="cityRight" @touchstart="moveStart" @touchmove="move" @touchend="moveEnd">
-      <li class="cityRightItem" @click="parentLetter(index)" v-for="(item,index) of letterList" :key="index">{{index}}</li>
+    <ul class="cityRight" ref="cityRight">
+      <li class="cityRightItem" :ref="item"  @touchstart="moveStart($event)" @touchmove="move($event)" @touchend="moveEnd" @click="parentLetter(item)" v-for="(item,index) of letter" :key="index" >{{item}}</li>
     </ul>
   </div>
 </template>
@@ -11,15 +11,36 @@ export default {
   name: '',
   data () {
     return {
+      cityMain: '',
+      touchStatus: false,
+      thatW: ''
     }
   },
-  props: ['letterList'],
+  props: ['letterlist'],
+  updated () {
+    this.cityMain = this.$refs['cityRight'].offsetTop
+    this.thatW = this.$refs['A'][0].clientHeight
+  },
+  computed: {
+    letter () {
+      const list = []
+      for (let key in this.letterlist) {
+        list.push(key)
+      }
+      return list
+    }
+  },
   methods: {
-    moveStart () {
-      // console.log(1)
+    moveStart (e) {
+      this.touchStatus = true
     },
-    move () {
-      // console.log(2)
+    move (e) {
+      if (this.touchStatus) {
+        let index = Math.floor((e.changedTouches[0].clientY - this.cityMain) / this.thatW)
+        if (index >= 0 && index <= this.letter.length) {
+          console.log(this.letter[index])
+        }
+      }
     },
     moveEnd () {
       // console.log(3)

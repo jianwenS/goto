@@ -5,8 +5,8 @@
         城市选择
      </div>
      <div class="main">
-        <cityRight :letterList="letterList" v-on:parentLetter='parentLetter'></cityRight>
-        <cityList :letterList="letterList" :letter="letter" :hotCityList="hotCityList"></cityList>
+        <cityRight :letterlist="letterlist" v-on:parentLetter='parentLetter'></cityRight>
+        <cityList :letterlist="letterlist" :letter="letter" :hotCityList="hotCityList"></cityList>
     </div>
   </div>
 </template>
@@ -21,19 +21,19 @@ export default {
     axios.get('/static/city.json').then(res => {
       const {cities, hotCities} = res.data.data
       this.hotCityList = hotCities
-      this.letterList = cities
+      this.letterlist = cities
     })
   },
   data () {
     return {
-      letterList: {},
+      letterlist: {},
       hotCityList: [],
-      letter:''
+      letter: ''
     }
   },
   methods: {
     parentLetter (letter) {
-      this.letter = letter;
+      this.letter = letter
     }
   },
   components: {
