@@ -5,13 +5,13 @@
       <span>猜你喜欢</span>
     </div>
     <ul class="like-bom">
-         <li class="border-bottom">
+         <li class="border-bottom" v-for="(item, index) in recommendList" :key="index" @click="goDetail(item.id)">
            <div class="like-bom-img">
-             <img src="http://img1.qunarzz.com/sight/p0/1902/84/84696f368bbec10da3.img.jpg_200x200_50323152.jpg" />
+             <img :src="item.imgUrl" />
            </div>
            <div class="like-bom-message">
-             <p class="title">北京世界园艺博览会</p>
-             <p class="num">5.6</p>
+             <p class="title">{{item.title}}</p>
+             <p class="num">{{item.desc}}</p>
              <p class="price"><i>￥108</i>起<span>延庆</span></p>
            </div>
          </li>
@@ -20,14 +20,26 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
+  created () {
+    axios.get('/static/index.json').then(res => {
+      const { recommendList } = res.data.data
+      this.recommendList = recommendList
+    })
+  },
   name: '',
   data () {
     return {
+      recommendList: []
     }
   },
-
-  methods: {}
+  methods: {
+    goDetail (id) {
+      this.$router.push('/detail/' + id)
+    }
+  }
 }
 </script>
 <style lang='less' scoped>
