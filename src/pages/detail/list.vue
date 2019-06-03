@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="listman">
     <div v-for="(item, index) in textList" :key="index">
       <div class="detailListItem">
          <div class="mp-ticketype-ticket" @click="item.isshow = !item.isshow" :class="{ active: item.isshow }"></div>
@@ -21,14 +21,13 @@ export default {
   data () {
     return {}
   },
-  methods: {
-    aaa (isshow) {
-      alert(111)
-    }
-  }
+  methods: {}
 }
 </script>
-<style lang='less'>
+<style lang='less' scoped>
+.listman{
+  height:30rem;
+}
   .detailListItem{
     overflow: hidden;
     position: relative;

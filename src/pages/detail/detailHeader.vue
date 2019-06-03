@@ -55,7 +55,7 @@ export default {
   }
 }
 </script>
-<style lang='less'>
+<style lang='less' scoped>
  .header{
     position: absolute;
     left:0;
@@ -72,6 +72,7 @@ export default {
     }
     .leftscend{
       position: fixed;
+      z-index:10;
       left:0;
       width:100%;
       top:0;

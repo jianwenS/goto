@@ -37,11 +37,12 @@ export default {
   }
 }
 </script>
-<style lang='less'>
+<style lang='less' scoped>
     .wapper /deep/ .swiper-container{overflow:inherit;}
    .gallary{
      position:fixed;
      display:flex;
+     z-index:10;
      top:0;
      overflow: hidden;
      left:0;

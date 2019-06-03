@@ -20,11 +20,9 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   created () {
-    axios.get('/static/index.json').then(res => {
+    this.$http.get('/static/index.json').then(res => {
       const { recommendList } = res.data.data
       this.recommendList = recommendList
     })
